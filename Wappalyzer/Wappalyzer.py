@@ -2,7 +2,7 @@
 from typing import Callable, Dict, Iterable, List, Any, Mapping, Set
 import json
 import logging
-import pkg_resources
+import importlib.resources
 import re
 import os
 import pathlib
@@ -88,7 +88,7 @@ class Wappalyzer:
             from `AliasIO/wappalyzer <https://github.com/AliasIO/wappalyzer>`_ repository.  
         
         """
-        default=pkg_resources.resource_string(__name__, "data/technologies.json")
+        default = importlib.resources.files("Wappalyzer").joinpath("data/technologies.json").read_bytes()
         defaultobj = json.loads(default)
 
         if technologies_file:
